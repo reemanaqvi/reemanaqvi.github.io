@@ -96,12 +96,11 @@
 
 <body>
 	
-		<form action="http://reemanaqvi.github.io/radar_chart">
-	    	<input type="submit" value="Go to the Radar Chart">
-		</form>
+	<form action="http://reemanaqvi.github.io/radar_chart">
+    	<input type="submit" value="Go to the Radar Chart">
+	</form>
 
-
-	<div id="heading" style="float:right">
+	<div id="heading" >
 		Top 200 Universities' Data for 2016
 	</div>
 
@@ -110,13 +109,14 @@
     	<button id="light-theme">Light Background</button>
 	</div>
 
-	<button onclick="goBack()">Home</button>
+	<!-- <button onclick="goBack()">Home</button> -->
+	
 	<script>
 
 
-	function goBack() {
-	    window.history.back();
-	}
+	// function goBack() {
+	//     window.history.back();
+	// }
 
 	var margin = {top: 30, right: 10, bottom: 10, left: 10},
 	    width = 1300 - margin.right - margin.left,
