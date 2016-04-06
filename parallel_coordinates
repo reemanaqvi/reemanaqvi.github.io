@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>Reema's Code</title>
+	<title>Parallel Coordinates</title>
 	<script src="http://d3js.org/d3.v3.min.js"></script>
 
 	<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.min.js"></script>
@@ -96,7 +96,7 @@
 
 <body>
 	<div id="link" style="float:left">
-		<form action="http://google.com">
+		<form action="http://reemanaqvi.github.io/radar_chart">
 	    	<input type="submit" value="Go to the Radar Chart">
 		</form>
 	</div>
