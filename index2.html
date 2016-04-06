@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Reema's Code</title>
+	<script src="http://d3js.org/d3.v3.min.js"></script>
+
+	<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.min.js"></script>
+</head>
+	<style>
+
+	body {
+		background: #f0f0f0;
+	}
+
+	svg {
+	  font: 10px sans-serif;
+	}
+
+	body.dark {
+	  background: #090909;
+	  color: #ccc;
+	}
+
+	.dark .axis text {
+	  fill: #f2f2f2;
+	  text-shadow: 0 1px 0 #000, 1px 0 0 #000;
+	}
+
+	.dark .axis text.label {
+	  fill: #ddd;
+	}
+
+	.dark .brush .extent {
+	  fill: rgba(255,255,255,0.12);
+	  stroke: rgba(0,0,0,0.5);
+	}
+
+	.background path {
+	  fill: none;
+	  stroke: #ddd;
+	  shape-rendering: crispEdges;
+	}
+
+	.foreground path {
+	  fill: none;
+	  stroke: steelblue;
+	}
+
+	.brush .extent {
+	  fill-opacity: .3;
+	  stroke: #fff;
+	  shape-rendering: crispEdges;
+	}
+
+	.axis line,
+	.axis path {
+	  fill: none;
+	  stroke: #000;  /*axis color*/
+	  shape-rendering: crispEdges;
+	}
+
+	.axis text {
+	  text-shadow: 0 1px 0 #fff, 1px 0 0 #fff, 0 -1px 0 #fff, -1px 0 0 #fff;
+	  cursor: move;
+	}
+
+	button{
+	  display: inline-block;
+	  font-family: 'Oswald', tahoma;
+	  cursor: pointer;
+	  /*margin-left: 20px;*/
+	  border-radius: 2px;
+	  text-decoration: none;
+	  padding: 5px;
+	  font-size: 13px;
+	  background-color: white;
+	  border: 1px solid black;
+	}
+
+	button:hover{
+	  background-color: #ff5f78;
+	}
+
+	#heading {
+		text-align: center;
+		font-weight: bold;
+		font-size: 2em;
+	}
+
+	.buttons {
+		position:relative;
+		text-align: center;
+	}
+
+	</style>
+
+<body>
+	<div id="link" style="float:left">
+		<form action="http://google.com">
+	    	<input type="submit" value="Go to the Radar Chart">
+		</form>
+	</div>
+
+	<div id="heading" style="float:right">
+		Top 200 Universities' Data for 2016
+	</div>
+
+	<div class="buttons">
+		<button id="dark-theme">Dark Background</button>
+    	<button id="light-theme">Light Background</button>
+	</div>
+
+	<button onclick="goBack()">Home</button>
+	<script>
+
+
+	function goBack() {
+	    window.history.back();
+	}
+
+	var margin = {top: 30, right: 10, bottom: 10, left: 10},
+	    width = 1300 - margin.right - margin.left,
+	    height = 600 - margin.top - margin.bottom;
+
+	var x = d3.scale.ordinal().rangePoints([0, width], 1),
+	    y = {},
+	    dragging = {};
+
+	var line = d3.svg.line(),
+	    axis = d3.svg.axis().orient("left"),
+	    background,
+	    foreground;
+
+	// Define the div for the tooltip
+	var div = d3.select("body").append("div")	
+    	.attr("class", "tooltip")				
+    	.style("opacity", 0);
+
+	var svg = d3.select("body").append("svg")
+	    .attr("width", width + margin.left + margin.right)
+	    .attr("height", height + margin.top + margin.bottom)
+	    .append("g")
+	    .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+
+	
+	d3.select("#dark-theme")
+	    .on("click", function() {
+	      d3.select("body").attr("class", "dark");
+	    });
+
+	d3.select("#light-theme")
+	    .on("click", function() {
+	      d3.select("body").attr("class", null);
+	    });    
+
+	// Read in the csv
+	d3.csv("reema.csv", function(error, data) {
+		data.forEach(function(d) {
+
+			if (d.Income === "-") {
+				d.Income = null;
+			}
+			if (d.Citations === "-") {
+				d.Income = null;
+			}
+			if (d.International === "-") {
+				d.International = null;
+			}
+	        // d.International_Students = parseFloat(d.International_Students) / 100.0;
+	        
+     	});
+
+
+		x.domain(dimensions = d3.keys(data[0]).filter(function(d) {
+			// if (d === "Univ") {
+			// 	return false;
+			// if (d == "Year") {
+			// var xAxis = d3.svg.axis()
+   //  			.scale(x)
+   //  			.tickValues(["2011", "2012"]);
+			// }
+			if (d == "Country") {
+				return  (y[d] = d3.scale.ordinal()
+		        .domain(data.map(function(p) { return p[d]; }))
+		        .rangePoints([0, height]));
+			}
+			if (d === "Rank") {
+				return  (y[d] = d3.scale.linear()
+		        .domain(d3.extent(data, function(p) { return +p[d]; }))
+		        .range([0, height]));
+			} else {
+		    return (y[d] = d3.scale.linear()
+		        .domain(d3.extent(data, function(p) { return +p[d]; }))
+		        .range([height, 0]));
+			}
+    }));
+
+
+		  // Add grey background lines for context.
+		  background = svg.append("g")
+		      .attr("class", "background")
+		    .selectAll("path")
+		      .data(data)
+		    .enter().append("path")
+		      .attr("d", path);
+
+		  // Add blue foreground lines for focus.
+		  foreground = svg.append("g")
+		      .attr("class", "foreground")
+		    .selectAll("path")
+		      .data(data)
+		    .enter().append("path")
+		      .attr("d", path)
+		      .style("stroke", function(d) {
+		      	if (d["Country"] === "America")
+		      		return "#E5006B";
+		      	if (d["Country"] === "UK")
+		      		return "#DD9E00";
+		      	if (d["Country"] === "Switzerland")
+		      		return "#03899B";
+		      	if (d["Country"] === "Canada")
+		      		return "#0F1B64";
+		      	if (d["Country"] === "Singapore")
+		      		return "#D64800";
+		      	if (d["Country"] === "Sweden")
+		      		return "#FA8603";
+		      	if (d["Country"] === "Germany")
+		      		return "#5102B3";
+		      	if (d["Country"] === "Australia")
+		      		return "#686114";
+		      	if (d["Country"] === "Belgium")
+		      		return "#5C0B1B";
+		      	if (d["Country"] === "China")
+		      		return "#0D92FE";
+		      	if (d["Country"] === "Japan")
+		      		return "red";
+		      	if (d["Country"] === "Hong Kong")
+		      		return "#BDD105";
+		      	if (d["Country"] === "Netherlands")
+		      		return "#0F8D03";
+		      	if (d["Country"] === "France")
+		      		return "#0E03AC";
+		      	if (d["Country"] === "Finland")
+		      		return "#999999";
+		      	if (d["Country"] === "Denmark")
+		      		return "#FEB117";
+		      	if (d["Country"] === "South Korea")
+		      		return "#6F8879";
+		      	if (d["Country"] === "Italy")
+		      		return "#09FC39";
+		      	if (d["Country"] === "South Africa")
+		      		return "#999999";
+		      	if (d["Country"] === "Norway")
+		      		return "red";
+		      	if (d["Country"] === "Austria")
+		      		return "#999999";
+		      	if (d["Country"] === "Spain")
+		      		return "#1B4B13";
+		      	if (d["Country"] === "Ireland")
+		      		return "#2117EC";
+		      	if (d["Country"] === "Russia")
+		      		return "#999999";
+		      	if (d["Country"] === "Taiwan")
+		      		return "#999999";
+		      	if (d["Country"] === "New Zealand")
+		      		return "#999999";
+		      	if (d["Country"] === "Israel")
+		      		return "#999999";	
+		      	if (d["Country"] === "Luxembourg")
+		      		return "#999999";	      				      				      				      		
+		      });
+
+		  // Add a group element for each dimension.
+		  var g = svg.selectAll(".dimension")
+		      .data(dimensions)
+		    .enter().append("g")
+		      .attr("class", "dimension")
+		      .attr("transform", function(d) { return "translate(" + x(d) + ")"; })
+		      .call(d3.behavior.drag()
+		        .origin(function(d) { return {x: x(d)}; })
+		        .on("dragstart", function(d) {
+		          dragging[d] = x(d);
+		          background.attr("visibility", "hidden");
+		        })
+		        .on("drag", function(d) {
+		          dragging[d] = Math.min(width, Math.max(0, d3.event.x));
+		          foreground.attr("d", path);
+		          dimensions.sort(function(a, b) { return position(a) - position(b); });
+		          x.domain(dimensions);
+		          g.attr("transform", function(d) { return "translate(" + position(d) + ")"; })
+		        })
+		        .on("dragend", function(d) {
+		          delete dragging[d];
+		          transition(d3.select(this)).attr("transform", "translate(" + x(d) + ")");
+		          transition(foreground).attr("d", path);
+		          background
+		              .attr("d", path)
+		            .transition()
+		              .delay(500)
+		              .duration(0)
+		              .attr("visibility", null);
+		        }));
+
+		  // Add an axis and title.
+		  g.append("g")
+		      .attr("class", "axis")
+		      .each(function(d) { d3.select(this).call(axis.scale(y[d])); })
+		    .append("text")
+		      .style("text-anchor", "middle")
+		      .attr("y", -9)
+		      .text(function(d) { return d; });
+
+		  // Add and store a brush for each axis.
+		  g.append("g")
+		      .attr("class", "brush")
+		      .each(function(d) {
+		        d3.select(this).call(y[d].brush = d3.svg.brush().y(y[d]).on("brushstart", brushstart).on("brush", brush));
+		      })
+		    .selectAll("rect")
+		      .attr("x", -8)
+		      .attr("width", 16);
+
+     });
+	
+	function position(d) {
+	  var v = dragging[d];
+	  return v == null ? x(d) : v;
+	}
+
+	function transition(g) {
+	  return g.transition().duration(500);
+	}
+
+	// Returns the path for a given data point.
+	function path(d) {
+	  return line(dimensions.map(function(p) { return [position(p), y[p](d[p])]; }));
+	}
+
+	function brushstart() {
+	  d3.event.sourceEvent.stopPropagation();
+	}
+
+	// Handles a brush event, toggling the display of foreground lines.
+	function brush() {
+	  var actives = dimensions.filter(function(p) { return !y[p].brush.empty(); }),
+	      extents = actives.map(function(p) { return y[p].brush.extent(); });
+	  foreground.style("display", function(d) {
+	    return actives.every(function(p, i) {
+	      return extents[i][0] <= d[p] && d[p] <= extents[i][1];
+	    }) ? null : "none";
+	  });
+	}
+    </script>
+  </body>
+</html>
