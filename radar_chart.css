@@ -1,0 +1,143 @@
+/*Original CSS from Source File:*/
+
+.radar-chart .level {
+  stroke: grey;
+  stroke-width: 0.5;
+}
+.radar-chart .axis line {
+  stroke: grey;
+  stroke-width: 1;
+}
+.radar-chart .axis .legend {
+  font-family: sans-serif;
+  font-size: 10px;
+}
+.radar-chart .axis .legend.top {
+  dy:1em;
+}
+.radar-chart .axis .legend.left {
+  text-anchor: start;
+}
+.radar-chart .axis .legend.middle {
+  text-anchor: middle;
+}
+.radar-chart .axis .legend.right {
+  text-anchor: end;
+}
+
+.radar-chart .tooltip {
+  font-family: sans-serif;
+  font-size: 13px;
+  transition: opacity 200ms;
+  opacity: 0;
+}
+.radar-chart .tooltip.visible {
+  opacity: 1;
+}
+
+/* transitions */
+.radar-chart .area, .radar-chart .circle {
+  transition: opacity 300ms, fill-opacity 200ms;
+  opacity: 1;
+}
+.radar-chart .d3-enter, .radar-chart .d3-exit {
+  opacity: 0;
+}
+
+/*Updated CSS Below*/
+
+html {
+  font-family: sans-serif;
+  background: #f0f0f0;
+}
+
+#title_box, #render_button, #charts {
+  text-align: center;
+}
+
+#radar_params {
+  margin-bottom: 10px;
+}
+
+#note {
+  text-align: center;
+  font-style: italic;
+}
+
+#years, #universities {
+  text-align: center;
+  margin-bottom: 10px;
+}
+
+#chart1 , #chart2, #chart3 {
+  display: inline-block;
+  width: 30%;
+}
+
+#c2011, #c2012, #c2013, #c2014, #c2015, #c2016 {
+  display: inline-block;
+  padding-left: 3px;
+  padding-right: 5px;
+  margin-top: 5px;
+  margin-left: 1px;
+  margin-right: 1px;
+}
+
+#c2011 {
+  background: rgba(218, 5, 251, 0.2);
+}
+#c2012 {
+  background: rgba(86, 8, 253, 0.2);
+}
+#c2013 {
+  background: rgba(5, 59, 254, 0.2);
+}
+#c2014 {
+  background: rgba(8, 191, 255, 0.2);
+}
+#c2015 {
+  background: rgba(5, 255, 183, 0.2);
+}
+#c2016 {
+  background: rgba(8, 255, 44, 0.2);
+}
+
+.radar-chart .area {
+  stroke-width: 1;
+  stroke-opacity: 0.7;
+  fill-opacity: 0.2;
+}
+.radar-chart.focus .area {
+  fill-opacity: 0.1;
+}
+.radar-chart.focus .area.focused {
+  fill-opacity: 0.5;
+}
+.radar-chart .circle {
+  fill-opacity: 0.9;
+}
+
+.area._2011_, ._2011_ .circle {
+  fill: #DA05FB;
+  stroke: #DA05FB;
+}
+.area._2012_, ._2012_ .circle {
+  fill: #5608FD;
+  stroke: #5608FD;
+}
+.area._2013_, ._2013_ .circle {
+  fill: #053BFE;
+  stroke: #053BFE;
+}
+.area._2014_, ._2014_ .circle {
+  fill: #08BFFF;
+  stroke: #08BFFF;
+}
+.area._2015_, ._2015_ .circle {
+  fill: #05FFB7;
+  stroke: #05FFB7;
+}
+.area._2016_, ._2016_ .circle {
+  fill: #08FF2C;
+  stroke: #08FF2C;
+}

@@ -1,0 +1,203 @@
+<!-- d3 Interactive Visualization HTML -->
+
+<!DOCTYPE html>
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Radar Chart</title>
+    <link rel="stylesheet" type="text/css" href="radar_chart.css">
+    <script type="text/javascript" src="d3/d3.v3.js"></script>
+    <script src="radar_chart.js"></script>
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+  </head>
+  <body>
+    <form action="http://www.google.com">
+      <input type="submit" value="Go to Parallel Coordinates Chart">
+    </form>
+
+    <div id='title_box'>
+      <h1 id='title'>World University Rankings</h1>
+      <h2 id='subtitle'>Top 30 Universities from 2011 to 2016</h2>
+      <p id='note'>Values of 0 indicate an unreported metric</p>
+    </div>
+    <div id='radar_params'>
+      <div id='years'>Select Year(s)<br>
+        <div id='c2011'><input type='checkbox' id='2011' value='2011'>2011</div>
+        <div id='c2012'><input type='checkbox' id='2012' value='2012'>2012</div>
+        <div id='c2013'><input type='checkbox' id='2013' value='2013'>2013</div>
+        <div id='c2014'><input type='checkbox' id='2014' value='2014'>2014</div>
+        <div id='c2015'><input type='checkbox' id='2015' value='2015'>2015</div>
+        <div id='c2016'><input type='checkbox' id='2016' value='2016'>2016</div>
+      </div>
+      <div id='universities'>Select Universities<br>
+        <select id='university1'><option>---</option></select>
+        <select id='university2'><option>---</option></select>
+        <select id='university3'><option>---</option></select>
+      </div>
+      <div id='render_button'>
+        <button type='button' onclick=render()>Update Charts</button>
+      </div>
+    </div>
+    <div id='charts'>
+      <div id='chart1' ></div>
+      <div id='chart2' ></div>
+      <div id='chart3' ></div>
+    </div>
+
+    <script>
+    function goBack() {
+      window.history.back();
+    }
+    </script>
+
+    <script>
+    var uni1;
+    var uni2;
+    var uni3;
+
+    $( '#university1' ).change(function() {
+      uni1 = $( '#university1 option:selected' ).text();
+    });
+    
+    $( '#university2' ).change(function() {
+      uni2 = $( '#university2 option:selected' ).text();
+    });
+    
+    $( '#university3' ).change(function() {
+      uni3 = $( '#university3 option:selected' ).text();
+    });
+
+    var y2011;
+    var y2012;
+    var y2013;
+    var y2014;
+    var y2015;
+    var y2016;
+
+    $( '#2011' ).change(function(e) {
+      y2011 = $( '#2011:checked' ).val();
+    });
+
+    $( '#2012' ).change(function(e) {
+      y2012 = $( '#2012:checked' ).val();
+    });
+
+    $( '#2013' ).change(function(e) {
+      y2013 = $( '#2013:checked' ).val();
+    });
+
+    $( '#2014' ).change(function(e) {
+      y2014 = $( '#2014:checked' ).val();
+    });
+
+    $( '#2015' ).change(function(e) {
+      y2015 = $( '#2015:checked' ).val();
+    });
+
+    $( '#2016' ).change(function(e) {
+      y2016 = $( '#2016:checked' ).val();
+    });
+
+    </script>
+
+
+    <script>
+    
+    // Modified from: http://www.w3schools.com/jsref/met_select_add.asp
+    function addToList(uni_name, id) {
+      var x = document.getElementById(id);
+      var option = document.createElement("option");
+      option.text = uni_name;
+      x.add(option, x[-1]);
+    };
+
+    // Modified from: http://stackoverflow.com/questions/2248976/check-if-value-is-in-select-list-with-jquery
+    function inOptions(uni_name, id) {
+      for (i = 0, opts = document.getElementById(id).options; i < opts.length; ++i) {
+        if (opts[i].value === uni_name) {
+          return true;
+          break;
+        }
+      }
+      return false;
+    };
+
+
+    var y2011data = [];
+    var y2012data = [];
+    var y2013data = [];
+    var y2014data = [];
+    var y2015data = [];
+    var y2016data = [];
+
+
+    // Imports, and converts, data from .csv
+    d3.csv('timesData_radar.csv', function(error, data) {
+      data.forEach(function(d) {
+        if (!inOptions(d.university_name, 'university1')) {
+          addToList(d.university_name, 'university1');
+          addToList(d.university_name, 'university2');
+          addToList(d.university_name, 'university3');
+        };
+        if (isNaN(+d.total_score)) {total_score = null} else {total_score = +d.total_score};
+        if (isNaN(+d.teaching)) {teaching = null} else {teaching = +d.teaching};
+        if (isNaN(+d.international)) {international = null} else {international = +d.international};
+        if (isNaN(+d.research)) {research = null} else {research = +d.research};
+        if (isNaN(+d.citations)) {citations = null} else {citations = +d.citations};
+        if (isNaN(+d.income)) {income = null} else {income = +d.income};
+        eval('y'+d.year+'data').push(
+          {
+            schoolName: d.university_name,
+            schoolData: {
+              className: '_'+d.year+'_',
+              axes: [
+                {axis: "Total Score", value: total_score},
+                {axis: "Teaching", value: teaching},
+                {axis: "International", value: international},
+                {axis: "Research", value: research},
+                {axis: "Citations", value: citations},
+                {axis: "Income", value: income}
+              ]
+            }
+          }
+        );
+      });
+    });
+
+    function selectData(uniNum) {
+      temp = [];
+      for (j = 1; j < 7; j++) {
+        if (eval('y201'+j) != null) {
+          dataset = eval('y201'+j+'data');
+          for (i = 0; i < dataset.length; i++) {
+            if (dataset[i]['schoolName'] == uniNum) {
+              temp.push(dataset[i]['schoolData']);
+            }
+          }
+        }
+      };
+      return temp;
+    };
+
+    function render() {
+      
+      one = selectData(uni1);
+      two = selectData(uni2);
+      three = selectData(uni3);
+
+      // Overrides default configuration settings in JS file
+      RadarChart.defaultConfig.color = function() {};
+      RadarChart.defaultConfig.radius = 3;
+      RadarChart.defaultConfig.w = 350;
+      RadarChart.defaultConfig.h = 350;
+
+      var chart = RadarChart.chart();
+      var cfg = chart.config(); // retrieve default config
+      if (one.length > 0) {RadarChart.draw('#chart1', one, cfg)} else {(d3.select('#chart1').select('svg').remove())};
+      if (two.length > 0) {RadarChart.draw('#chart2', two, cfg)} else {(d3.select('#chart2').select('svg').remove())};
+      if (three.length > 0) {RadarChart.draw('#chart3', three, cfg)} else {(d3.select('#chart3').select('svg').remove())};
+    }
+    </script>
+  </body>
+</html>
