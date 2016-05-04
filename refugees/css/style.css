@@ -1,6 +1,6 @@
 @import url(http://fonts.googleapis.com/css?family=Open+Sans:400,300,700,600);
 html, body {
-  background-color: black;
+  background-color: black; /*This doesn't show*/
   font-family: 'Open Sans', sans-serif;
 }
 
@@ -45,7 +45,7 @@ html, body {
   text-align: center;
   position: relative;
   overflow: hidden;
-  background-color: #000;
+  background-color: red;
 }
 .container section:nth-child(1) .image {
   background-image: url(http://d2nj4n4ep9vg2s.cloudfront.net/wp-content/uploads/2015/12/12082015_Featured_EuropeCrisis3.jpg);
@@ -89,7 +89,7 @@ html, body {
           flex-wrap: nowrap;
   height: 100%;
   width: 100%;
-  max-width: 70%;
+  max-width: 74%;
   -webkit-box-pack: center;
   -webkit-justify-content: center;
       -ms-flex-pack: center;
@@ -100,10 +100,12 @@ html, body {
   margin: 0 auto;
   font-size: 26px;
   position: relative;
-  margin: 0 auto;s
+  margin: 0 auto;
 }
 .container section .stuff h2 {
   margin: 0px;
+  color: #ffffff;
+  background-color: red;
 }
 
 /*the two line*/
@@ -116,7 +118,15 @@ html, body {
   margin: 10px 0;  /*space between the lines and the content within*/
 }
 
-
+#tableau1 {
+  margin: auto;
+  display: block;
+}
+#tableau-header {
+  color: red;
+  text-align: center;
+  display: block;
+}
 
 a {
   color: inherit;
