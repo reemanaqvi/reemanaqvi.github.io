@@ -45,7 +45,7 @@ html, body {
   text-align: center;
   position: relative;
   overflow: hidden;
-  background-color: red;
+  background-color: black;
 }
 .container section:nth-child(1) .image {
   background-image: url(http://d2nj4n4ep9vg2s.cloudfront.net/wp-content/uploads/2015/12/12082015_Featured_EuropeCrisis3.jpg);
