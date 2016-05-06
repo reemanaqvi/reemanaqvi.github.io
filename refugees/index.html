@@ -16,54 +16,45 @@
 <!-- SLIDE 1: COVER -->
     <section class="parallax-1">
         <div class="inner-parallax">
+            <p id="title">
             <h1>REFUGEE CRISIS</h1>
             <h4>by Eric Hagen, Rob Kuvinka, Reema Naqvi</h4>
+        </p>
         </div>
     </section>
-
-    <div class="banner">
-        <!-- <br><br><br><br><br> -->
-        <p id="intro-blurb">
-            INTRO BLURB GOES HERE
-        <br>
-        ds
-        d<br>fvdgb<br>dsfsd
-        </p>
-    </div>
 
 
 <!-- SLIDE 2: INTRO BLURB -->
     <div class="banner">
+        <!-- <br><br><br><br><br> -->
+        <p id="intro-blurb">
+            Beginning in December 2010, unrest in many Middle Eastern countries led to protest, demonstration and, in some cases, civil war and revolution.  These related events, which would become known as the Arab Spring, seeded both political change and social upheaval.  While some of these transitions yielded positive and more peaceful living conditions, others forced millions out of their home countries. <br><br>In exploring the United Nations High Commission for Refugees <a href="http://popstats.unhcr.org/en/time_series">(UNHCR) data</a>, we focus on the period including and following the Arab Spring to identify trends and anomalies.
+            <br><br>We begin by exploring where the refugees are fleeing from and how it relates to countries' <span><a href="http://www.visionofhumanity.org/#/page/indexes/global-peace-index">global peace index</a>. 
+        </p>
+    </div>
 
-        <br>
+
+<!-- SLIDE 3: ERICS DASHBOARD#1 -->
+    <div class="banner">
         <script type='text/javascript' src='https://public.tableau.com/javascripts/api/viz_v1.js'></script><div class='tableauPlaceholder' style='width: 1104px; height: 669px;'><noscript><a href='#'><img alt='Dashboard 1 ' src='https:&#47;&#47;public.tableau.com&#47;static&#47;images&#47;ar&#47;arabspringeda_E&#47;Dashboard1&#47;1_rss.png' style='border: none' /></a></noscript><object class='tableauViz' width='1104' height='600' style='display:none;'><param name='host_url' value='https%3A%2F%2Fpublic.tableau.com%2F' /> <param name='site_root' value='' /><param name='name' value='arabspringeda_E&#47;Dashboard1' /><param name='tabs' value='no' /><param name='toolbar' value='yes' /><param name='static_image' value='https:&#47;&#47;public.tableau.com&#47;static&#47;images&#47;ar&#47;arabspringeda_E&#47;Dashboard1&#47;1.png' /> <param name='animate_transition' value='yes' /><param name='display_static_image' value='yes' /><param name='display_spinner' value='yes' /><param name='display_overlay' value='yes' /><param name='display_count' value='yes' /><param name='showTabs' value='y' /></object></div>
     </div>
 
 
-<!-- SLIDE 3:  -->
+
+<!-- SLIDE 4: SYRIA, IRAQ, AFGHANISTAN BLURB-->
 
     <section class="parallax-2">
         <div class="inner-parallax">
-            <h2>Some kind of intro narrative should go here</h2>
-        </div>
-    </section>
-
-<!-- SLIDE 4 -->
-    <div class="banner" > 
-        <br><br><br>
-        <script type='text/javascript' src='https://public.tableau.com/javascripts/api/viz_v1.js'></script><div class='tableauPlaceholder' style='width: 1104px; height: 600px;'><noscript><a href='#'><img alt='Dashboard 1 ' src='https:&#47;&#47;public.tableau.com&#47;static&#47;images&#47;Im&#47;Immigration_12&#47;Dashboard1&#47;1_rss.png' style='border: none' /></a></noscript><object class='tableauViz' width='1104' height='600' style='display:none;'><param name='host_url' value='https%3A%2F%2Fpublic.tableau.com%2F' /> <param name='site_root' value='' /><param name='name' value='Immigration_12&#47;Dashboard1' /><param name='tabs' value='no' /><param name='toolbar' value='no' /><param name='static_image' value='https:&#47;&#47;public.tableau.com&#47;static&#47;images&#47;Im&#47;Immigration_12&#47;Dashboard1&#47;1.png' /> <param name='animate_transition' value='yes' /><param name='display_static_image' value='yes' /><param name='display_spinner' value='yes' /><param name='display_overlay' value='yes' /><param name='display_count' value='yes' /><param name='showTabs' value='y' /></object></div>
-    </div>
-
-<!-- SLIDE 5 -->
-    <section class="parallax-3">
-        <div class="inner-parallax">
-           
-
+            <p id="threecountry-blurb">
+                Afghanistan has long been the global leader in refugee count. <br>War and political turmoil in Syria and Iraq have more recently sparked <br>a refugee crisis of staggering proportion. <br><br>Explore how these crises have developed.
+        </p>
         </div>
     </section>
 
 
-<!-- D3 -->
+
+<!-- SLIDE 5: D3 -->
+
 <div class="map">
 <script>
 
@@ -106,9 +97,6 @@ d3.json("syrirq.json", function(error, uk) {
       .attr("d", path)
       .attr('class', function(d) { return d.id; })
       .on("mouseover",handleMouseOver);
-      // .on("mouseout",handleMouseOut);
-      
-
   
 function handleMouseOver(d,i){console.log('ENTER')
 
@@ -129,7 +117,7 @@ svg.append("text")
         .attr("dy", ".35em")
         .attr('class','internal')
         .attr('font',"open-sans")
-        .attr('font-size',"25px")
+        .attr('font-size',"22px")
         .text('Syria has seen an unprecedented rise')
 svg.append("text")
         .attr("x", 30)
@@ -137,23 +125,23 @@ svg.append("text")
         .attr("dy", ".35em")
         .attr('class','internal')
         .attr('font',"open-sans")
-        .attr('font-size',"25px")
-        .text('in refugees since 2012. Over')
+        .attr('font-size',"22px")
+        .text('in refugees since 2012. Over half')
 svg.append("text")
         .attr("x", 30)
         .attr("y", 220)
         .attr("dy", ".35em")
         .attr('class','internal')
         .attr('font',"open-sans")
-        .attr('font-size',"25px")
-        .text('half of these refugees are under' )
+        .attr('font-size',"22px")
+        .text('of these refugees are under the age' )
 svg.append("text")
         .attr("x", 30)
         .attr("y", 260)
         .attr("dy", ".35em")
         .attr('class','internal')
         .attr('font',"open-sans")
-        .attr('font-size',"25px")
+        .attr('font-size',"22px")
         .text('the age of 18.' )
 
 
@@ -216,10 +204,7 @@ svg.append("text")
               .ease('linear')
               .attr('x', 1200)
               .attr('width',0)
-
         });
-
-
 
 //text for demographic chart
 svg.append("text")
@@ -234,7 +219,6 @@ svg.append("text")
         .attr("dy", ".35em")
         .attr('class','testtext')
         .text('10.7%')
-
 svg.append("text")
         .attr("x", 490)
         .attr("y", 543)
@@ -283,8 +267,6 @@ svg.append("text")
         .attr("dy", ".35em")
         .attr('class','testtext')
         .text('1.3%')
-
-
 
 //demographic chart
 var female = [8.3,10.7,6.2,23.9,1.6]
@@ -411,15 +393,15 @@ svg.append("text")
         .attr("dy", ".35em")
         .attr('class','internal')
         .attr('font',"open-sans")
-        .attr('font-size',"25px")
-        .text('During the Iraqi War, Syria')
+        .attr('font-size',"22px")
+        .text('During the Iraq War, Syria')
 svg.append("text")
         .attr("x", 30)
         .attr("y", 180)
         .attr("dy", ".35em")
         .attr('class','internal')
         .attr('font',"open-sans")
-        .attr('font-size',"25px")
+        .attr('font-size',"22px")
         .text('recieved many Iraqis refugees.')
 svg.append("text")
         .attr("x", 30)
@@ -427,15 +409,15 @@ svg.append("text")
         .attr("dy", ".35em")
         .attr('class','internal')
         .attr('font',"open-sans")
-        .attr('font-size',"25px")
-        .text('But as conflicts in Syria escalated,' )
+        .attr('font-size',"22px")
+        .text('But, as conflict in Syria escalated,' )
 svg.append("text")
         .attr("x", 30)
         .attr("y", 260)
         .attr("dy", ".35em")
         .attr('class','internal')
         .attr('font',"open-sans")
-        .attr('font-size',"25px")
+        .attr('font-size',"22px")
         .text('many Iraqis were forced to flee back.' )
 svg.append("text")
         .attr("x", 30)
@@ -443,7 +425,7 @@ svg.append("text")
         .attr("dy", ".35em")
         .attr('class','internal')
         .attr('font',"open-sans")
-        .attr('font-size',"25px")
+        .attr('font-size',"22px")
         .text('Currently in Iraq:' )
 //IDP
 var people = svg.append('svg:image')
@@ -476,7 +458,7 @@ var rectangle4 = svg.append('rect')
         .attr('x',100)
         .attr('y',400)
         .attr('height',300)
-        .attr('width',250)
+        .attr('width',275)
         .style('opacity',1)
         .style('fill','#b5b3b0');
 
@@ -484,9 +466,8 @@ rectangle4.transition()
         .delay(500)
         .duration(0)
         .ease('linear')
-        .attr('x', 350)
+        .attr('x', 375)
         .attr('width',0)
-
 
 //Refugees
 var running = svg.append('svg:image')
@@ -606,16 +587,15 @@ var rectangle6 = svg.append('rect')
         .attr('x',900)
         .attr('y',450)
         .attr('height',250)
-        .attr('width',275)
+        .attr('width',300)
         .style('opacity',1)
         .style('fill','#b5b3b0');
 rectangle6.transition()
         .delay(3500)
         .duration(0)
         .ease('linear')
-        .attr('x', 1175)
+        .attr('x', 1200)
         .attr('width',0)
-
       }
   } ;
   
@@ -653,15 +633,38 @@ function handleMouseOut(){console.log('EXIT')
 
 
 
+<!-- SLIDE 6: 3 COUNTRIES BOXPLOT DASHBOARD-->
+    <div class="banner" >
+        <br><br>
+        <script type='text/javascript' src='https://public.tableau.com/javascripts/api/viz_v1.js'></script><div class='tableauPlaceholder' style='width: 1104px; height: 600px;'><noscript><a href='#'><img alt='Dashboard 1 ' src='https:&#47;&#47;public.tableau.com&#47;static&#47;images&#47;dr&#47;drilldown_4&#47;Dashboard1&#47;1_rss.png' style='border: none' /></a></noscript><object class='tableauViz' width='1104' height='600' style='display:none;'><param name='host_url' value='https%3A%2F%2Fpublic.tableau.com%2F' /> <param name='site_root' value='' /><param name='name' value='drilldown_4&#47;Dashboard1' /><param name='tabs' value='no' /><param name='toolbar' value='yes' /><param name='static_image' value='https:&#47;&#47;public.tableau.com&#47;static&#47;images&#47;dr&#47;drilldown_4&#47;Dashboard1&#47;1.png' /> <param name='animate_transition' value='yes' /><param name='display_static_image' value='yes' /><param name='display_spinner' value='yes' /><param name='display_overlay' value='yes' /><param name='display_count' value='yes' /><param name='showTabs' value='y' /></object></div>
+    </div>
 
 
-    
+
+<!-- SLIDE 7: BLURB IMMIGRATION - REEMA -->
+    <section class="parallax-3">
+        <div class="inner-parallax">
+           <p id="immigration-blurb">
+                While some countries have opened their doors to shelter refugees, others have shunned all such humanitarian responsibility. Lebanon's population is now comprised of 20% Syrians. Meanwhile, the resource-rich Gulf Cooperation Council namely Saudi Arabia, Kuwait, United Arab Emirates, Bahrain and Oman, has offered zerio resettlement places to Syrian refugees. 
+                <br><br>
+                Explore the number of refugees present in different countries of the world, and where they have come from. 
+            </p>
+
+        </div>
+    </section>
+
+<!-- SLIDE 8 : IMMIGRATION DASHBOARD - REEMA-->
+    <div class="banner" > 
+        <br><br><br>
+        <script type='text/javascript' src='https://public.tableau.com/javascripts/api/viz_v1.js'></script><div class='tableauPlaceholder' style='width: 1104px; height: 600px;'><noscript><a href='#'><img alt='Dashboard 1 ' src='https:&#47;&#47;public.tableau.com&#47;static&#47;images&#47;Im&#47;Immigration_12&#47;Dashboard1&#47;1_rss.png' style='border: none' /></a></noscript><object class='tableauViz' width='1104' height='600' style='display:none;'><param name='host_url' value='https%3A%2F%2Fpublic.tableau.com%2F' /> <param name='site_root' value='' /><param name='name' value='Immigration_12&#47;Dashboard1' /><param name='tabs' value='no' /><param name='toolbar' value='no' /><param name='static_image' value='https:&#47;&#47;public.tableau.com&#47;static&#47;images&#47;Im&#47;Immigration_12&#47;Dashboard1&#47;1.png' /> <param name='animate_transition' value='yes' /><param name='display_static_image' value='yes' /><param name='display_spinner' value='yes' /><param name='display_overlay' value='yes' /><param name='display_count' value='yes' /><param name='showTabs' value='y' /></object></div>
+    </div>
  
-<!-- SLIDE 7 -->
+<!-- SLIDE 9: END CREDITS -->
      <section class="parallax-4">
         <div class="inner-parallax">
-           
-            text text text
+           <p id="end-blurb">
+                Recent developments in the proliferation of refugees and internally displaced persons in Iraq and Syria have proven to be more extreme in terms of magnitude than trends in refugee movement from other Middle Eastern countries.  At the current rate of proliferation, the numbers of refugees, especially those refugees originating from Syria, has the potential to create a humanitarian crisis on a scale unseen in decades.  It will continue to become necessary for more GCC countries to begin to adopt a participatory role in harboring these refugees.<br><br>
+           </p>
         </div>
     </section>
   
