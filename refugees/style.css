@@ -9,7 +9,7 @@ html, body {
 	color: white;
 	background: #22252a;
 	/*font-family: Montserrat,"Helvetica Neue",Helvetica,Arial,sans-serif;*/
-	text-shadow: 2px 2px 8px #000;
+	/*text-shadow: 2px 2px 8px #000;*/
 	font-family: 'Open Sans', sans-serif;	
 
 }
@@ -18,6 +18,7 @@ h1 {
 	text-align: center;
 	color: #e6b800;
 	text-transform: uppercase;
+	text-shadow: 2px 2px 8px #000;
 	/*vertical-align: middle;*/
 }
 
@@ -46,9 +47,7 @@ h4 {
 	text-align: center;
 	height: 100vh;
 	width: auto;
-	/*Increases the size of the banner*/
-	/*padding-top: 18%;*/
-	/*padding-bottom: 18%;*/
+
 }
 
 .tableau {
@@ -57,6 +56,7 @@ h4 {
 
 .tableauPlaceholder {
 	margin: 0 auto;
+	overflow: hidden;
 }
 
 
@@ -91,3 +91,67 @@ h4 {
 }
 
 /*Parallax*/
+
+
+
+/*D3*/
+
+.IRR { fill: #FF9900; }
+.IRK { fill: #FF9900; }
+.SYU { display: none; }
+.SYX { fill: #FFCC00; }
+.selected { fill: yellow; }
+
+
+.subunit-boundary {
+  fill: none;
+  stroke: #777;
+  stroke-dasharray: 2,2;
+  stroke-linejoin: round;
+}
+
+.subunit-label {
+  fill: #777;
+  fill-opacity: .5;
+  font-size: 20px;
+  font-weight: 300;
+  text-anchor: middle;
+}
+
+
+path { 
+    stroke: black;
+    stroke-width: 2;
+    fill: none;
+}
+
+path.line123 { 
+    stroke:#871414;
+    stroke-width: 4;
+    fill: none;
+}
+
+
+.axis path,
+.axis line {
+    fill: none;
+    stroke: grey;
+    stroke-width: 1;
+    shape-rendering: crispEdges;
+}
+
+.map{
+    color:red;
+    position:absolute;
+    left:0;
+    top:0;
+    z-index:2;
+
+}
+.highchart{
+    color:blue;
+    position:absolute;
+    left:0;
+    top:0 ;
+    z-index:1;
+}
